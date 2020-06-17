@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:storysoftware/theme/style.dart';
 
@@ -10,6 +11,17 @@ _LibraryPageState createState() => _LibraryPageState();
 }
 
 class _LibraryPageState extends State<LibraryPage> {
+  bool _isPlaying = false;
+  String url = "https://thepaciellogroup.github.io/AT-browser-tests/audio/jeffbob.mp3";
+
+  AudioPlayer audioPlayer;
+
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer = new AudioPlayer(mode: PlayerMode.MEDIA_PLAYER);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +35,33 @@ class _LibraryPageState extends State<LibraryPage> {
         backgroundColor: appTheme().primaryColor,
       ),
       drawer: CustomDrawer(PageNames.Library),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                RaisedButton(
+                  onPressed: () async {
+                    setState(() {
+                      _isPlaying = true;
+                    });
+
+                  },
+
+                  child: Text(
+                    'Load Audio File',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.blue,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
